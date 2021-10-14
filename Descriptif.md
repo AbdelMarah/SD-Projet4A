@@ -1,6 +1,6 @@
 # Description du cas d'application : 
 
-##Un site web de location des voitures. 
+## Un site web de location des voitures. 
 
 Les utilisateurs pourront en accédant au site de voir toutes les voitures disponibles pour la location, avec une option de connexion si l'on possède déjà un compte ou dans le cas contraire s'inscrire en renseignant ses informations dans une nouvelle page qui apparaîtra et qui contiendra des champs vides que l'utilisateur doit remplir tel : 
 ***Le nom complet, le numéro de téléphone, l'adresse et le mot de passe...***
