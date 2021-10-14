@@ -1,12 +1,14 @@
-# Description du cas d'application :
+# Description du cas d'application : 
 
-### Il s'agit d'un site web de location de voitures.  
- 
-Les fonctionnalités :
+## Un site web de location des voitures. 
 
-1. Les utilisateurs pourront voir toutes les voitures disponibles et faire louer une voiture en quelques taps.
-2. Les utilisateurs pourront accéder à leurs comptes avec l'option de création de compte ou de connexion.
-3. Les utilisateurs pourront louer leurs voitures en ajoutant  des offres sur le site. (la description des caractéristiques de la voiture sera demandé)
-4. Les administrateurs auront plus de fonctionnalités, par exemple: l'option de supprimer quelques annonces. 
-5. Le site possédera une section où les clients ayant déjà bénéficié des services pourront partager leurs expériences et donner leurs avis.<br>
-D'autres fonctionnalités sont aussi envisagées tel l'ajout d'un filtre de recherche ainsi qu'un calendrier pour désigner la date de début et de fin de location souhaitée.
+Les utilisateurs pourront en accédant au site de voir toutes les voitures disponibles pour la location, avec une option de connexion si l'on possède déjà un compte ou dans le cas contraire s'inscrire en renseignant ses informations dans une nouvelle page qui apparaîtra et qui contiendra des champs vides que l'utilisateur doit remplir tel : 
+***Le nom complet, le numéro de téléphone, l'adresse et le mot de passe...***
+
+Après avoir créer son compte, l'utilisateur aura accès à tous les services rendus par le site.En effet, non seulement il aura la possibilité d'effectuer des reservations d'autres voitures mais il pourra à son tour déposer une annonce pour louer sa propre voiture en quelques clics celle-ci apparaîtra sur la page d'accueil du site à côté des autres annonces qui seront réparties sous forme de blocs avec des images et une description des caractéristiques de la voiture concernée. 
+
+Tout en bas, on ajoutera une section où les clients ayant déjà bénéficiés des services rendus par le site pourront partager leur expérience et retours. 
+Et finalement d'autres fonctionnalités sont aussi envisagées tel l'ajout d'un filtre de recherche ainsi qu'un calendrier pour désigner la date de début et de fin de location souhaitée.
+
+
+
