@@ -1,0 +1,66 @@
+<div>
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <div>
+      <label for="name">Name</label>
+      <input
+        type="text"
+        [(ngModel)]="user.name"
+        id="name"
+        name="name"
+        placeholder="Enter your name"
+        required
+        #name="ngModel"
+      />
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input
+        type="text"
+        [(ngModel)]="user.email"
+        id="email"
+        name="email"
+        placeholder="Enter your email address"
+        required
+        #email="ngModel"
+      />
+    </div>
+    <div>
+      <label for="adresse">Adresse</label>
+      <input
+        type="text"
+        [(ngModel)]="user.adresse"
+        id="adresse"
+        name="adresse"
+        placeholder="Enter your address"
+        required
+        #adresse="ngModel"
+      />
+    </div>
+    <div>
+      <label for="password">password</label>
+      <input
+        type="text"
+        [(ngModel)]="user.password"
+        id="password"
+        name="password"
+        placeholder="Enter your password"
+        required
+        #password="ngModel"
+      />
+    </div>
+    <div>
+      <label for="numeroTel">numeroTel</label>
+      <input
+        type="text"
+        [(ngModel)]="user.numeroTel"
+        id="numeroTel"
+        name="numeroTel"
+        placeholder="Enter your numeroTel"
+        required
+        #numeroTel="ngModel"
+      />
+    </div>
+
+    <button type="submit" [disabled]="!userForm.form.valid">Envoyer</button>
+  </form>
+</div>
