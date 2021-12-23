@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 export interface Car {
     id : number;
     name : String;
@@ -7,4 +9,6 @@ export interface Car {
     kilometrage : number;
     boiteAvitesse : String;
     description : String;
+    carOwner : User;
 }
+
