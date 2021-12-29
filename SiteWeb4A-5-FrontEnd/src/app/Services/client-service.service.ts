@@ -1,0 +1,33 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Client } from '../Classes/client';
+import { Observable } from 'rxjs/Observable';
+
+@Injectable()
+export class ClientService {
+  public host: string;
+
+  constructor(private http: HttpClient) {
+    this.host = 'http://localhost:8080';
+  }
+
+  public getResource(url){
+    return this.http.get(url);
+  }
+
+  public getClients(): Observable<Client[]> { //return un objet de type Observable
+    return this.http.get<Client[]>(this.host+"/findClients");
+  }
+  
+  // this.clientService.getClients().subscribe(data => {
+  //   this.users = data;
+  // });
+
+  public save(client: Client) {
+    return this.http.post<Client>(this.host+"/addClient", client);
+  }
+
+  public deleteClient(id : number) : Observable<void> {
+    return this.http.delete<void>(this.host+"/deleteClient/3");
+  } 
+}
