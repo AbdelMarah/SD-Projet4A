@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container px-5">
+    <a routerLink="/" class="navbar-brand">Four wheels Car Renter </a>
+    <div class="collapse navbar-collapse">
+      <ul
+        *ngIf="!this.authService.isAuthenticated()"
+        class="navbar-nav ms-auto mb-2 mb-lg-0"
+      >
+        <li class="nav-item">
+          <a routerLink="/register" class="nav-link">Inscription</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/signup" class="nav-link">Connexion</a>
+        </li>
+        <li class="nav-item">
+          <a href="#features" class="nav-link">Nous contacter</a>
+        </li>
+      </ul>
+      <ul
+        *ngIf="this.authService.isAuthenticated()"
+        class="navbar-nav ms-auto mb-2 mb-lg-0"
+      >
+        <li class="nav-item">
+          <button (click)="onLogout()" type="button" class="btn btn-primary">
+            LogOut
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

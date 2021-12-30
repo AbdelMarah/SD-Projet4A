@@ -1,0 +1,409 @@
+<!-- Nav bar-->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a routerLink="/" class="navbar-brand">Four wheels Car Renter</a>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul *ngIf="this.authService.isAuthenticated()" class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link">Page d'accueil</a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            data-bs-toggle="modal"
+            data-bs-target="#addEmployeeModal"
+            >Déposer annonce</a
+          >
+        </li>
+      </ul>
+      <ul
+        *ngIf="!this.authService.isAuthenticated()"
+        class="navbar-nav me-auto"
+      >
+        <li class="nav-item">
+          <a routerLink="/register" class="nav-link">Inscription</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/signup" class="nav-link">Connexion</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input
+          class="form-control me-2"
+          type="text"
+          name="key"
+          (ngModelChange)="searchCars(key.value)"
+          #key="ngModel"
+          ngModel
+          id="searchCar"
+          placeholder="Search for cars..."
+        />
+        <button class="btn btn-primary" type="button">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<!-- Body Cards-->
+<div class="container-fluid d-flex bg-light">
+  <div *ngFor="let car of cars" class="row mt-4">
+    <div class="col-sm-3">
+      <div class="card mx-4 bg-info shadow-lg p-1 mb-1 bg-dark">
+        <img src="{{ car.imageUrl }}" class="card-img-top" />
+        <div class="card-body pt-0 px-0">
+          <hr class="mt-2 mx-3 bg-white" />
+          <div class="d-flex flex-row justify-content-between mb-0 px-3">
+            <h6 class="mt-1 text-light">Voiture : {{ car.name }}</h6>
+          </div>
+          <hr class="mt-2 mx-3 bg-white" />
+          <div class="d-flex flex-row justify-content-between mb-0 px-3">
+            <h6 class="mt-1 text-light">Prix de location</h6>
+            <small class="text-light">&euro;22,495 / day</small>
+          </div>
+          <hr class="mt-2 mx-3 bg-white" />
+          <div class="d-flex flex-row justify-content-between px-3 pb-4">
+            <div class="d-flex flex-column">
+              <span class="text-light">Fuel Efficiency</span
+              ><small class="text-light">L/100KM&ast;</small>
+            </div>
+            <div class="d-flex flex-column">
+              <h5 class="mb-0 text-light">8.5/7.1</h5>
+              <small class="text-right text-light">(city/Hwy)</small>
+            </div>
+          </div>
+          <hr class="mt-2 mx-3 bg-white" />
+          <div class="d-flex flex-row justify-content-between p-3 mid">
+            <div class="d-flex flex-column">
+              <small class="mb-1">ENGINE</small>
+              <div class="d-flex flex-row">
+                <img
+                  src="https://imgur.com/iPtsG7I.png"
+                  width="35px"
+                  height="25px"
+                />
+                <div class="d-flex flex-column ml-1">
+                  <small class="ghj">1.4L MultiAir</small
+                  ><small class="ghj">16V I-4 Turbo</small>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column">
+              <small class="mb-2">HORSEPOWER</small>
+              <div class="d-flex flex-row">
+                <img src="https://imgur.com/J11mEBq.png" />
+                <h6 class="ml-1">135 hp&ast;</h6>
+              </div>
+            </div>
+          </div>
+          <div class="mx-3 mt-3 mb-2">
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-danger btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#viewCarModal"
+              (click)="onSelectCar(car)"
+            >
+              <small>Afficher détails</small>
+            </button>
+            <button
+              [hidden]="true"
+              type="button"
+              id="openCarInfo"
+              data-toggle="modal"
+              data-target="#viewCarModal"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="viewCarModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">
+          {{ selectedCar?.name }}
+        </h4>
+        <button type="button" class="close" data-bs-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container">
+          <h6>Voiture selectionnée: {{ selectedCar?.description }}</h6>
+          <div class="row">
+            <div class="col">
+              <img
+                src="{{ selectedCar?.imageUrl }}"
+                class="card-img-top"
+                width="100%"
+              />
+            </div>
+          </div>
+          <h6>Car Details</h6>
+          <div class="row">
+            <div class="col-xs-6">
+              <ul type="none">
+                <li class="left">Energie: {{ selectedCar?.energie }}</li>
+                <li class="left">
+                  Nombre de places: {{ selectedCar?.nbPlaces }}
+                </li>
+                <li class="left">
+                  Kilométrage: {{ selectedCar?.kilometrage }}
+                </li>
+                <li class="left">
+                  Boite à Vitesse: {{ selectedCar?.boiteAvitesse }}
+                </li>
+                <li class="left">
+                  Description: {{ selectedCar?.description }}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <h6>Owner Details</h6>
+          <div class="row" style="border-bottom: none">
+            <div class="col-xs-6">
+              <ul type="none">
+                <li class="left">
+                  Nom : {{ selectedCar?.carOwner?.nom }}
+                  {{ selectedCar?.carOwner?.prenom }}
+                  <!-- {{ this.authService.authenticatedUser.nom }} -->
+                </li>
+                <li class="left">
+                  Localisation :
+                  {{ selectedCar?.carOwner?.localisation }}
+                  <!-- {{
+                  this.authService.authenticatedUser.localisation
+                }} -->
+                </li>
+                <li class="left">
+                  Phone : {{ selectedCar?.carOwner?.phoneNumber }}
+                  <!-- {{
+                  this.authService.authenticatedUser.phoneNumber
+                }} -->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Car Modal -->
+<div
+  *ngIf="this.authService.isAuthenticated()"
+  class="modal fade"
+  id="addEmployeeModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addEmployeeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCarModalLabel">
+          Déposez votre voiture en location
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddCar(addForm)">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              ngModel
+              name="name"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="energie">energie</label> <br />
+            <select name="energie" id="pet-select">
+              <option value="">--Choisissez une option--</option>
+              <option value="dog">Electrique</option>
+              <option value="dog">Combustion</option>
+            </select>
+            <input
+              type="text"
+              ngModel
+              name="energie"
+              class="form-control"
+              id="energie"
+              placeholder="energie"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="nbPlaces">Nombre de Places</label>
+            <input
+              type="number"
+              ngModel
+              name="nbPlaces"
+              class="form-control"
+              id="nbPlaces"
+              placeholder="nbPlaces"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="kilometrage">kilometrage</label>
+            <input
+              type="number"
+              ngModel
+              name="kilometrage"
+              class="form-control"
+              id="kilometrage"
+              placeholder="kilometrage"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="imageUrl">Image URL</label>
+            <input
+              type="text"
+              ngModel
+              name="imageUrl"
+              class="form-control"
+              id="imageUrl"
+              placeholder="Image URL"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="boiteAvitesse">Boite à vitesse</label> <br />
+            <select name="boiteAvitesse" id="boiteAvitesse">
+              <option value="">--Choisissez une option--</option>
+              <option value="dog">Automatique</option>
+              <option value="dog">Manuelle</option>
+            </select>
+            <input
+              type="text"
+              ngModel
+              name="boiteAvitesse"
+              class="form-control"
+              id="boiteAvitesse"
+              placeholder="boiteAvitesse"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              ngModel
+              name="description"
+              class="form-control"
+              id="description"
+              placeholder="description"
+              required
+            />
+          </div>
+          <!-- <br />
+          <hr class="mt-2 mx-3 bg-black" />
+          <h6>Owner Details :</h6> -->
+
+          <!-- <div class="form-group">
+            <label for="description"> Prob : CarOwner : </label>
+            <input
+              type="obj"
+              ngModel
+              name="carOwner"
+              class="form-control"
+              id="idUser"
+              placeholder="Username"
+              value="this.authService.authenticatedUser"
+              required
+            />
+          </div> -->
+
+          <!-- <div class="form-group">
+            <label for="description">User Name</label>
+            <input
+              type="text"
+              ngModel
+              name="carOwner.username"
+              class="form-control"
+              id="username"
+              placeholder="Username"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="description">Localisation</label>
+            <input
+              type="text"
+              ngModel
+              name="carOwner.localisation"
+              class="form-control"
+              id="localisation"
+              placeholder="Localisation"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="description">Phone Number</label>
+            <input
+              type="text"
+              ngModel
+              name="phoneNumber"
+              class="form-control"
+              id="carOwner.phoneNumber"
+              placeholder="PhoneNumber"
+              required
+            />
+          </div> -->
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="add-car-form"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              [disabled]="addForm.invalid"
+              type="submit"
+              class="btn btn-primary"
+            >
+              Save changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
