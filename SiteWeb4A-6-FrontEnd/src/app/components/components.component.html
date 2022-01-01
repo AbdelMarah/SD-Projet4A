@@ -1,0 +1,105 @@
+<!-- Header-->
+<header class="section section-dark pb-0 pt-5">
+  <div class="container px-4">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-lg-7 col-sm-12">
+        <div class="text-center text-lg-start">
+          <h1 class="fw-bolder text-white">
+            Louez une voiture<br/>en quelques clicks !!!
+          </h1>
+        </div>
+      </div>
+      <div class="col-sm-12 col-lg-5 mt-3 m-lg-0 d-xl-block text-start">
+        <div
+            class="
+              d-grid
+              gap-3
+              d-sm-flex
+              justify-content-sm-center justify-content-xl-start
+            "
+          >
+            <a
+              routerLink="/catalogue/0"
+              class="btn btn-primary btn-outline-light btn-lg px-4 me-sm-3"
+              >Consulter les annonces</a
+            >
+            <a (click)="Navigate1()" class="btn btn-primary btn-outline-light btn-lg px-4"
+              >Déposer votre annonce</a
+            >
+          </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="section section-dark mb-3">
+  <hr />
+  <div class="container">
+    <h3 class="text-center text-lg-start fw-bolder text-white mt-5">
+      Des voitures adaptées à vos besoins
+    </h3>
+    <div class="row example-page">
+      <div class="col-md-3 text-center" routerLinkActive="active">
+        <a >
+          <img (click)="Navigate(1)"
+            src="./assets/img/examples/citadine.JPG"
+            alt="Rounded Image"
+            class="img-rounded img-responsive"
+            style="width: 100%"
+          />
+          <a (click)="Navigate(1)"
+            class="btn btn-outline-neutral btn-round"
+            >Citadine</a
+          >
+        </a>
+      </div>
+
+      <div class="col-md-3 text-center" routerLinkActive="active">
+        <a (click)="Navigate(2)">
+          <img
+            src="./assets/img/examples/utilitaire.JPG"
+            alt="Rounded Image"
+            class="img-rounded img-responsive"
+            style="width: 100%"
+          />
+          <a
+            (click)="Navigate(2)"
+            class="btn btn-outline-neutral btn-round"
+            >Utilitaire</a
+          >
+        </a>
+      </div>
+
+      <div class="col-md-3 text-center" routerLinkActive="active">
+        <a (click)="Navigate(3)">
+          <img
+            src="./assets/img/examples/sport.JPG"
+            alt="Rounded Image"
+            class="img-rounded img-responsive"
+            style="width: 100%"
+          />
+          <a
+            (click)="Navigate(3)"
+            class="btn btn-outline-neutral btn-round"
+            >Sport</a
+          >
+        </a>
+      </div>
+
+      <div class="col-md-3 text-center" routerLinkActive="active">
+        <a (click)="Navigate(4)">
+          <img
+            src="./assets/img/examples/voiturette.JPG"
+            alt="Rounded Image"
+            class="img-rounded img-responsive"
+            style="width: 100%"
+          />
+          <a (click)="Navigate(4)"
+            class="btn btn-outline-neutral btn-round">Voiturette</a>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

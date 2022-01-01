@@ -1,0 +1,186 @@
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <div class="">
+      <a class="navbar-brand" href="">Voitures</a>
+      <button
+        class="navbar-toggler navbar-burger"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarToggler"
+        aria-controls="navbarTogglerDemo02"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        (click)="sidebarToggle()"
+      >
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+      </button>
+    </div>
+    <div class="">
+    <div class="navbar-collapse" id="navbarToggler">
+      <ul *ngIf="!this.authService.isAuthenticated()" class="navbar-nav justify-content-xl-end">
+        <li class="nav-item">
+          <button
+            [routerLink]="['/register']"
+            type="button"
+            class="btn btn-info btn-round"
+          >
+            S'inscrire
+          </button>
+        </li>
+        <li class="nav-item ms-lg-1">
+          <button
+            [routerLink]="['/signup']"
+            type="button"
+            class="btn btn-info btn-round"
+          >
+            Se connecter
+          </button>
+        </li>
+      </ul>
+      <ul *ngIf="this.authService.isAuthenticated()" class="navbar-nav">
+        <li class="navbar-brand nav-item">
+          {{this.authService.getName()}}
+        </li>
+        <!-- <li class="nav-item me-md-2">
+          <button [routerLink]="['/users']" type="button" class="btn btn-danger">Louer ma voiture</button>
+        </li> -->
+        <li *ngIf="this.authService.isAdmin()" class="nav-item">
+          <button
+            [routerLink]="['/users']"
+            type="button"
+            class="btn btn-info btn-round"
+          >Liste des Clients
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            (click)="onLogout()"
+            type="button"
+            class="btn btn-info btn-round"
+          >Se déconnecter
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+ </div> 
+</nav>
+  
+
+
+<!--
+<nav class="navbar navbar-toggleable-md" color-on-scroll="300">
+  <div class="container">
+    
+      <div class="collapse navbar-collapse col-6" routerLinkActive="active">
+        <a class="navbar-brand" href="#">Voitures</a>
+      </div>
+      <div class="collapse navbar-collapse text-right" id="navbarToggler">
+        <a
+          class="nav-link"
+          rel="tooltip"
+          title="Like us on Facebook"
+          data-placement="bottom"
+          href="https://www.facebook.com/CreativeTim"
+          target="_blank"
+        >
+          <i class="fa fa-facebook-square"></i>
+        </a>
+        <a
+          class="nav-link"
+          rel="tooltip"
+          title="Follow us on Instagram"
+          data-placement="bottom"
+          href="https://www.instagram.com/CreativeTimOfficial"
+          target="_blank"
+        >
+          <i class="fa fa-instagram"></i>
+        </a>
+        <a
+          class="nav-link"
+          rel="tooltip"
+          title="Follow us on Twitter"
+          data-placement="bottom"
+          href="https://twitter.com/CreativeTim"
+          target="_blank"
+        >
+          <i class="fa fa-twitter"></i>
+        </a>
+        <button
+          [routerLink]="['/register']"
+          type="button"
+          class="btn btn-info btn-round"
+        >
+          S'inscrire
+        </button>
+        <button
+          [routerLink]="['/signup']"
+          type="button"
+          class="btn btn-info btn-round"
+        >
+          Se connecter
+        </button>
+        <button type="button" class="btn btn-danger">Louer ma voiture</button>
+      </div>
+  </div>
+</nav>
+
+
+  <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="isDocumentation()">
+          <a
+            class="nav-link"
+            rel="tooltip"
+            title="Follow us on Twitter"
+            data-placement="bottom"
+            href="https://twitter.com/CreativeTim"
+            target="_blank"
+          >
+            <i class="fa fa-twitter"></i>
+            <p class="d-lg-none">Twitter</p>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDocumentation()">
+          <a
+            class="nav-link"
+            rel="tooltip"
+            title="Like us on Facebook"
+            data-placement="bottom"
+            href="https://www.facebook.com/CreativeTim"
+            target="_blank"
+          >
+            <i class="fa fa-facebook-square"></i>
+            <p class="d-lg-none">Facebook</p>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDocumentation()">
+          <a
+            class="nav-link"
+            rel="tooltip"
+            title="Follow us on Instagram"
+            data-placement="bottom"
+            href="https://www.instagram.com/CreativeTimOfficial"
+            target="_blank"
+          >
+            <i class="fa fa-instagram"></i>
+            <p class="d-lg-none">Instagram</p>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isDocumentation()">
+          <a
+            class="nav-link"
+            rel="tooltip"
+            title="Star on GitHub"
+            data-placement="bottom"
+            href="https://www.github.com/CreativeTimOfficial/paper-kit-2-angular"
+            target="_blank"
+          >
+            <i class="fa fa-github"></i>
+            <p class="d-lg-none">GitHub</p>
+          </a>
+        </li>
+      </ul>
+-->
