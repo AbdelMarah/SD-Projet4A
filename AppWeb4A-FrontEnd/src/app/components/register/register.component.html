@@ -1,0 +1,230 @@
+
+
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header h4 text-white bg-info">S'incrire</div>
+    <div class="card-body">
+      <form
+        class=""
+        novalidate
+        (ngSubmit)="addClient()"
+        #registerForm="ngForm"
+      >
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nom"
+              [(ngModel)]="client.nom"
+              name="nom"
+              required
+              minlength="2"
+              #nomVar="ngModel"
+              [ngClass]="{
+                'is-invalid': nomVar.touched && !nomVar.valid
+              }"
+            />
+            <div class="invalid-feedback">
+              <span *ngIf="nomVar.errors?.['required']">
+                Entrez votre nom
+              </span>
+              <span *ngIf="nomVar.errors?.['minlength']">
+                Minimum 2 charactères
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Prénom"
+              [(ngModel)]="client.prenom"
+              name="prenom"
+              #prenomVar="ngModel"
+              required
+              maxlength="20"
+              [ngClass]="{
+                'is-invalid': prenomVar.touched && !prenomVar.valid
+              }"
+            />
+
+            <div class="invalid-feedback">
+              <span *ngIf="prenomVar.errors?.['required']">
+                Entrez votre prénom
+              </span>
+              <span *ngIf="prenomVar.errors?.['maxlength']">
+                Maxnimum 20 charactères
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="E-Mail"
+              [(ngModel)]="client.email"
+              #emailVar="ngModel"
+              name="email"
+              required
+              email
+              [ngClass]="{
+                'is-invalid': emailVar.touched && !emailVar.valid
+              }"
+            />
+            <div class="invalid-feedback">
+              <span *ngIf="emailVar.errors?.['required']">
+                Entrez votre E-Mail
+              </span>
+              <span *ngIf="emailVar.errors?.['email']">
+                L'E-Mail n'est pas valide
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Mot de passe"
+              [(ngModel)]="client.password"
+              #emailVar="ngModel"
+              name="password"
+              required
+              [ngClass]="{}"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Confirmation de mot de passe"
+              [(ngModel)]="client.password2"
+              #emailVar="ngModel"
+              name="password2"
+              required
+              [ngClass]="{}"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-8 mb-3 mb-md-0">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ville"
+              [(ngModel)]="client.ville"
+              #emailVar="ngModel"
+              name="ville"
+              required
+              [ngClass]="{}"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Numéro de téléphone"
+              [(ngModel)]="client.numero"
+              #emailVar="ngModel"
+              name="numero"
+              required
+              [ngClass]="{}"
+            />
+          </div>
+
+          <!-- <select class="form-control">
+            <option value="">Selectionner un département</option>
+            <option value="A">A</option>
+            <option value="A">B</option>
+            <option value="A">C</option>
+            <option value="A">D</option>
+          </select> -->
+
+        </div>
+
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="acceptationTerms"
+                  [(ngModel)]="plusInfo"
+                />
+                Plus d'information
+                <span class="form-check-sign"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row mb-3" *ngIf="plusInfo">
+          <div class="form-row mb-3">
+            <div class="col-md-12">
+              <input
+              type="text"
+              class="form-control"
+              placeholder="Adresse"
+              [(ngModel)]="client.adresse"
+              #emailVar="ngModel"
+              name="adresse"
+              required
+              [ngClass]="{}"
+            />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="acceptationTerms"
+                  [(ngModel)]="acceptationTerms"
+                />
+                J'accepte la politique de confidentialité
+                <span class="form-check-sign"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <button
+            class="btn btn-info"
+            type="submit"
+            [disabled]="!registerForm.valid || !acceptationTerms"
+          >
+            S'incrire
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<hr />
+<div class="mb-3 container text-center">
+Déjà un compte ?
+<a href="signup">Se connecter</a>
+</div>
+<!--
+<div class="container">
+  <button
+    class="btn btn-info"
+    (click)="onDialogue()"
+    >Test Alert
+  </button>
+</div> -->

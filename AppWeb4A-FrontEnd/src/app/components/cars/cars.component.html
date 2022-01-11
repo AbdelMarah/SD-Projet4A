@@ -1,0 +1,396 @@
+<!--nav-->
+<div class="row">
+<div class="col-lg-6 d-flex mt-3">
+  <button type="button" class="btn btn-info btn-link noneclickable">
+    {{title}}
+  </button>
+</div>
+<div class="col-lg-6 d-flex flex-lg-row-reverse mt-lg-3 ms-1 ms-lg-0">
+  <input
+    class="p-1 btn noneclickable"
+    type="text"
+    name="key"
+    (ngModelChange)="searchCars(key.value)"
+    #key="ngModel"
+    ngModel
+    id="searchCar"
+    placeholder="Rechercher"
+  />
+  <button *ngIf="this.authService.isAuthenticated()" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+    Louer ma voiture
+  </button>
+  <button *ngIf="!this.authService.isAuthenticated()" [routerLink]="['/signup']" type="button" class="btn btn-danger">
+    Louer ma voiture
+  </button>
+<!--  => Pour afficher les annonces d'un client / non utilise-->
+<!--  <button *ngIf="this.authService.isAuthenticated()" type="button" class="btn btn-danger" (click)="getClientAnonces()">-->
+<!--    Mes anonces-->
+<!--  </button>-->
+</div>
+</div>
+
+
+<!-- Car Cards-->
+<div class="row">
+<div *ngFor="let car of cars" class="col-lg-6 mt-3">
+  <div class="">
+    <div class="card mx-1 shadow-lg p-1 mb-1 bg-dark">
+      <img [src]="'./assets/img/examples/'+car.photoName" class="card-img-top" />
+      <div class="card-body px-3">
+        <hr class="mt-0 bg-white" />
+        <div class="d-flex flex-row justify-content-between ">
+          <h6 class="mt-0 text-light ">Name : {{ car.name }}</h6>
+        </div>
+        <hr class="mt-0 bg-white" />
+        <div class="d-flex flex-row justify-content-between">
+          <h6 class="mt-0 text-light">Marque : {{ car.marque }}</h6>
+        </div>
+        <hr class="mt-0 bg-white" />
+        <div class="d-flex flex-row justify-content-between">
+          <h6 class="mt-0 text-light">Prix de location</h6>
+          <h6 class="mt-0 text-light">{{ car.currentPrice }}&euro; / Jour</h6>
+        </div>
+        <hr class="mt-0 bg-white" />
+        <div class="d-flex flex-row justify-content-between p-3 mid">
+          <div class="d-flex flex-column">
+            <small class="mb-1">{{ car.energie }}</small>
+            <div class="d-flex flex-row">
+              <img
+                src="https://imgur.com/iPtsG7I.png"
+                width="35px"
+                height="25px"
+              />
+              <div class="d-flex flex-column m-2">
+                <small class="ghj">{{ car.moteurCapacite }}</small>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column">
+            <small class="mb-1">PUISSANCE</small>
+            <div class="d-flex flex-row">
+              <img src="https://imgur.com/J11mEBq.png" />
+              <h6 class="m-1">{{ car.puissance }} hp&ast;</h6>
+            </div>
+          </div>
+        </div>
+        <div class="mt-3 text-center">
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-info btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#viewCarModal"
+            (click)="onSelectCar(car)"
+          >
+            <small>Plus de détails</small>
+          </button>
+          <button
+            *ngIf="this.authService.isAdmin()"
+            type="button"
+            class="btn btn-info btn-danger"
+            (click)="supprimerCar(car)"
+          >
+            <small>Supprimer</small>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- More Details Modal -->
+<div
+class="modal fade"
+id="viewCarModal"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h2 class="modal-title">
+        {{ selectedCar?.name }}
+      </h2>
+    </div>
+    <!-- Modal body -->
+    <div class="modal-body">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <img
+              [src]="'./assets/img/examples/'+selectedCar?.photoName"
+              class="card-img-top"
+              width="100%"
+            />
+          </div>
+        </div>
+        <br/>
+        <h6>Informations sur la voiture :</h6>
+        <div class="row">
+          <div class="col-xs-6">
+            <ul type="none">
+              <li class="left">
+                Marque : {{ selectedCar?.marque }}
+              </li>
+              <li class="left">
+                Energie : {{ selectedCar?.energie }}
+              </li>
+              <li class="left">
+                Nombre de places : {{ selectedCar?.nbPlaces }}
+              </li>
+              <li class="left">
+                Kilométrage : {{ selectedCar?.kilometrage }}
+              </li>
+              <li class="left">
+                Boite à Vitesse : {{ selectedCar?.boiteAvitesse }}
+              </li>
+              <li class="left">
+                Puissance : {{ selectedCar?.puissance }} HP&ast;
+              </li>
+              <li class="left">
+                Capacite de moteur : {{ selectedCar?.moteurCapacite }}
+              </li>
+              <li class="left">
+                Ville voiture : {{ selectedCar?.ville }}
+              </li>
+              <li class="left">
+                Prix : {{ selectedCar?.currentPrice }}&euro; / Jour
+              </li>
+            </ul>
+          </div>
+        </div>
+        <h6>Informations sur le locataire :</h6>
+        <div class="row" style="border-bottom: none">
+          <div class="col-xs-6">
+            <ul *ngIf="clientCar" type="none">
+              <li class="left">
+                Nom : {{clientCar.nom}}
+              </li>
+              <li class="left">
+                Prenom : {{clientCar.prenom}}
+              </li>
+              <li class="left">
+                Ville : {{clientCar.ville}}
+              </li>
+              <li class="left">
+                Numéro de téléphone : {{clientCar.numero}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="text-center">
+          <button
+            type="button"
+            class="btn btn-secondary text-center"
+            data-bs-dismiss="modal"
+          >
+            Retour
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- AddCar Modal -->
+<div
+  class="modal fade"
+  id="addEmployeeModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addEmployeeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCarModalLabel">
+          Déposez votre voiture en location
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input
+              type="text"
+              name="name"
+              [(ngModel)]="car.name"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              type="text"
+              name="marque"
+              [(ngModel)]="car.marque"
+              class="form-control"
+              id="marque"
+              placeholder="Marque"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label >Catégorie</label>
+            <select
+              type="text"
+              [(ngModel)]="categoryCar"
+              name="catégorie"
+              class="form-control"
+              id="catégorie"
+              placeholder="Catégorie">
+              <option value="Citadine">Citadine</option>
+              <option value="Utilitaire">Utilitaire</option>
+              <option value="Sport">Sport</option>
+              <option value="Voiturette">Voiturette</option>
+            </select>
+          </div>
+          <br />
+          <div class="form-group">
+            <label>Energie</label>
+            <select
+            id="pet-select"
+            type="text"
+            [(ngModel)]="car.energie"
+            name="energie"
+            class="form-control">
+              <option value="Electrique">Electrique</option>
+              <option value="Combustion">Combustion</option>
+            </select>
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              type="number"
+              [(ngModel)]="car.nbPlaces"
+              name="nbPlaces"
+              class="form-control"
+              id="nbPlaces"
+              placeholder="nombre de places"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              type="number"
+              [(ngModel)]="car.kilometrage"
+              name="kilometrage"
+              class="form-control"
+              id="kilometrage"
+              placeholder="Kilometrage"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="boiteAvitesse">Boite à vitesse</label> <br />
+            <select
+              type="text"
+              [(ngModel)]="car.boiteAvitesse"
+              name="boiteAvitesse"
+              class="form-control"
+              id="boiteAvitesse"
+              placeholder="boiteAvitesse">
+              <option value="Automatique">Automatique</option>
+              <option value="Manuelle">Manuelle</option>
+            </select>
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="car.puissance"
+              name="puissance"
+              class="form-control"
+              id="puissance"
+              placeholder="Puissance"
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="car.moteurCapacite"
+              name="moteurCapacite"
+              class="form-control"
+              id="moteurCapacite"
+              placeholder="Capacité du moteur"
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="car.ville"
+              name="ville"
+              class="form-control"
+              id="ville"
+              *ngIf="this.authService.isAuthenticated()"
+              placeholder= "Ville voiture {{this.authService.authenticatedUser.ville}}"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="car.currentPrice"
+              name="currentPrice"
+              class="form-control"
+              id="currentPrice"
+              placeholder="Prix de location par jour"
+              required
+            />
+          </div>
+          <br />
+<!--          => Pour uploader la photo du voiture -->
+<!--          <div>-->
+<!--            <label class="mb-1">Photo de voiture</label> <br/>-->
+<!--            <input (change)="onSelectedFile($event)" class="mb-2" type="file"> <br/>-->
+<!--            <button (click)="uploadPhoto()" class="mb-2 btn btn-success btn-sm">Upload</button>-->
+<!--            {{progress}}-->
+<!--          </div>-->
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="car.photoName"
+              name="imageUrl"
+              class="form-control"
+              id="imageUrl"
+              placeholder="Image URL"
+              required
+            />
+          </div>
+          <br />
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="add-car-form"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Retour
+            </button>
+            <button
+              [disabled]="addForm.invalid"
+              type="submit"
+              class="btn btn-primary"
+            >
+              Enregistrer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

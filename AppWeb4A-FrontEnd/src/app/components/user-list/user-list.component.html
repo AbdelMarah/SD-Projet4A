@@ -1,0 +1,26 @@
+<div class="container card my-5">
+    <div class="card-body">
+      <table *ngIf="this.authService.isAdmin()" class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th class="d-none d-lg-block" scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th *ngIf="this.authService.isAdmin()" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.idClient }}</td>
+            <td>{{ user.nom }}</td>
+            <td>{{ user.prenom }}</td>
+            <td class="d-none d-lg-block">{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td class="text-center" *ngIf="this.authService.isAdmin()"><button (click)="supprimerClient(user)" *ngIf="!(user.role=='SUPADMIN')&&!(user.role==this.authService.authenticatedUser.role)" class="btn btn-danger btn-round">Supprimer</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

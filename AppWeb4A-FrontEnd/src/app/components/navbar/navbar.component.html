@@ -1,0 +1,68 @@
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <div class="">
+      <a class="navbar-brand" href="">Voitures</a>
+      <button
+        class="navbar-toggler navbar-burger"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarToggler"
+        aria-controls="navbarTogglerDemo02"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        (click)="sidebarToggle()"
+      >
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+      </button>
+    </div>
+    <div class="">
+    <div class="navbar-collapse" id="navbarToggler">
+      <ul *ngIf="!this.authService.isAuthenticated()" class="navbar-nav justify-content-xl-end">
+        <li class="nav-item">
+          <button
+            [routerLink]="['/register']"
+            type="button"
+            class="btn btn-info btn-round"
+          >
+            S'inscrire
+          </button>
+        </li>
+        <li class="nav-item ms-lg-1">
+          <button
+            [routerLink]="['/signup']"
+            type="button"
+            class="btn btn-info btn-round"
+          >
+            Se connecter
+          </button>
+        </li>
+      </ul>
+      <ul *ngIf="this.authService.isAuthenticated()" class="navbar-nav">
+        <li class="navbar-brand nav-item">
+          {{this.authService.getName()}}
+        </li>
+        <li *ngIf="this.authService.isAdmin()" class="nav-item">
+          <button
+            [routerLink]="['/users']"
+            type="button"
+            class="btn btn-info btn-round"
+          >Liste des Clients
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            (click)="onLogout()"
+            type="button"
+            class="btn btn-info btn-round"
+          >Se déconnecter
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+ </div>
+</nav>
+
