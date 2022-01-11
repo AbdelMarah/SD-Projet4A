@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="mt-md-5 col-md-2">
+
+      <ul class="list-group mt-2 mt-md-4" *ngIf="categories">
+        <li [ngClass]="currentCategorie==null?'active':''" class="list-group-item clickable" (click)="Navigate()" >
+          Tous les types
+        </li>
+        <li [ngClass]="currentCategorie==c?'active':''"  (click)="getProductsByCat(c)" class="list-group-item clickable" *ngFor="let c of categories._embedded.categories">
+          {{c.name}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-10">
+      <app-cars></app-cars>
+    </div>
+  </div>
+</div>

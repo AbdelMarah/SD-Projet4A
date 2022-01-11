@@ -1,0 +1,65 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header h4 text-white bg-info">Se connecter</div>
+    <div class="card-body">
+      <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
+        <div class="form-row mb-3">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="E-Mail"
+            [(ngModel)]="client.email"
+            #emailVar="ngModel"
+            name="email"
+            required
+            email
+            [ngClass]="{
+              'is-invalid': emailVar.touched && !emailVar.valid
+            }"
+          />
+          <div class="invalid-feedback">
+            <span *ngIf="emailVar.errors?.['required']">
+              Entrez votre E-Mail
+            </span>
+            <span *ngIf="emailVar.errors?.['email']">
+              L'E-Mail n'est pas valide
+            </span>
+          </div>
+        </div>
+
+        <div class="form-row mb-3">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Mot de passe"
+            [(ngModel)]="client.password"
+            #emailVar="ngModel"
+            name="password"
+            required
+          />
+        </div>
+
+        <div class="form-row text-right">
+          <button class="btn btn-info" type="submit">Se connecter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<hr />
+<div class="mb-3 container text-center">
+  Pas encore de compte?
+  <a href="register">
+      S'inscrire
+  </a>
+</div>
+
+<!--
+<p>Dirty: {{ registerForm.dirty }}</p>
+<p>Pristine: {{ registerForm.pristine }}</p>
+<p>Valid: {{ registerForm.valid }}</p>
+<p>InValid: {{ registerForm.invalid }}</p>
+<p>Value:</p>
+<pre>{{ registerForm.value | json }} </pre>
+-->
