@@ -31,7 +31,7 @@ On va commencer dans ce qui va suivre par présenter dans un premier temps l’a
 _Remarque : La partie front ne s’est pas réduite sur l’aspect visuel uniquement, on verra dans la suite qu’il y avait toute une logique derrière à implémenter._
 
 ## **Schéma modélisant l’architecture de la partie Back end:**
-![Alt text](/Users/mac/Desktop/archi.png )
+![Alt text](/Users/mac/Desktop/archi.png)
 Dans la partie back-end le développement est effectué côté serveur. L’image ci-dessus illustre l’architecture de cette partie qui est divisée en trois couches chacune ayant ses propres responsabilités.<BR>
 On commence d’abord par la couche d'accès aux données (DAO) qui est directement lié à la base de données. Cette couche s’occupe du traitement et de l'accès aux données qui sont persistés au sein d’un SGBD, dans notre cas (MySQL), son implémentation se résumerait à des interfaces qui héritent de JpaRepository.<BR> Cette dernière nous fournit un ensemble de méthodes pour interagir avec une base de données.<BR>
 Il vient ensuite la couche métier qui effectue les traitements métier de l’application; la logique de cette dernière, son implémentation sera sous forme de services qui vont se servir des interfaces de la couche d'accès aux données (DAO) pour effectuer les différents traitements relatifs à la logique de l’application.<BR>
@@ -207,8 +207,17 @@ Prenons l’exemple du service de clients, pour récupérer les clients de la ba
 ![](/Users/mac/Downloads/httpLink.png)
 Dans ce cas l'hôte est: *this.host="http://localhost:8080";*
 
-Conclusion : 
+## **Conclusion :** 
 
+Ce projet est beaucoup plus complexe que les projets que nous avons déjà réalisés en 3A, il permet de mettre en relation
+plusieurs enseignements, utilisés sous une dimension professionnelle.<br>
+
+Tout d’abord, ce projet nous a permis d'appliquer les connaissances que nous avons acquises durant le cours de systèmes distribués mais aussi durant notre formation, telles que les différents langages de programmation et frameworks, la gestion de projet,la communication.<br>
+Grâce à celui-ci chaque membre de l'équipe a pu renforcer ses connaissances mais aussi apporter aux autres membres son savoir et ses compétences afin d'harmoniser l'efficacité de l'équipe.<br>
+À travers des méthodes de travail et des outils, ce projet nous a permis de nous immerger dans un univers professionnel.<br>
+Il est vrai que de créer une application et respecter un cahier des charges rendent un projet intéressant et professionnel mais il y a aussi toutes les démarches qui ne sont pas visibles et qui rendent enrichissante une telle expérience : écouter l’opinion de chacun des membres de l'équipe,
+savoir communiquer et argumenter afin d’opter pour les meilleurs choix, s’organiser sur les plans personnels et collectifs, gérer les imprévus, respecter des délais pour ne pas gêner ses collègues et pour ne pas retarder tout le projet. <br>
+Le projet nous apporte donc à chacun une idée sur l’organisation dans le monde professionnel et qui permettra de nous adapter plus facilement lors de notre stage.<br>
 
 
 
